@@ -5,10 +5,14 @@ class Button extends React.Component {
   render() {
     return (
       <div className="button">
-        <span>Click Here</span>
+        <span>{this.props.value}</span>
       </div>
     );
   }
 }
+
+Button.defaultProps = {
+  value: "Click Here"
+};
 
 export default Button;

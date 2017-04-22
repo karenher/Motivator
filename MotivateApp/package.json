@@ -1,27 +1,31 @@
 {
-  "name": "motivateapp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server --hot"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "motivate-app",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "babel-core": "^6.24.0",
-    "babel-loader": "^6.4.1",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "webpack": "^2.3.2",
-    "webpack-dev-server": "^2.4.2"
+    "axios": "^0.16.1",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "fetch": "^1.1.0",
+    "mongoose": "^4.9.4",
+    "morgan": "^1.8.1",
+    "mysql": "^2.13.0",
+    "react": "^15.5.3",
+    "react-dom": "^15.5.3",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
+    "react-scripts": "^0.9.5",
+    "superagent": "^3.5.2",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
-    "babel-core": "^6.24.0",
-    "babel-loader": "^6.4.1",
-    "css-loader": "^0.28.0",
-    "style-loader": "^0.16.1"
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start:server": "node src/server",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
