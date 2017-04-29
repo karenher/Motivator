@@ -1,0 +1,9 @@
+.links:link {
+    text-decoration: none;
+    color: 'black';
+    font-size: 12px;
+    padding: 5px;
+}
+.links:visited {
+    color: black;
+}

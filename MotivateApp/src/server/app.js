@@ -19,15 +19,59 @@ app.use(morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:htt
 
 app.use(express.static(path.resolve(__dirname + '/../../build')));
 
-app.post('/api/getData3', function(req, res) {
-  var user = new User(req.body);
+app.post('/api/getAccount', function(req, res) {
+  var user = new User['account'](req.body);
   user.save(function (err) {
-    if (err) throw err;
+    if (err) return err;
     console.log('saving new user data');
+    res.send('working');
   });
-  createUser();
-  createUser();
-  createUser();
+});
+app.get('/api/loginInfo', function(req, res) {
+  User['account'].find({}, 'username password', function (err, data) {
+    if (err) {
+      console.log('Error');
+      return err;
+    } else {
+      res.send({rows: data});
+    }
+  });
+});
+app.post('/api/login', function(req, res) {
+  User['user'].remove({}, function (err) {
+    if (err) return err;
+    console.log('current_user collection empty');
+  });
+  var user = new User['user'](req.body);
+  user.save(function (err) {
+    if (err) return err;
+    console.log('saving user');
+    res.send('working');
+  });
+});
+app.get('/api/login', function(req, res) {
+  User['user'].find({}, 'username', function (err, data) {
+    if (err) {
+      console.log('Error');
+      return err;
+    } else {
+      res.send({rows: data});
+    }
+  });
+});
+app.post('/api/createGoals', function(req, res) {
+  console.log(req.body['username']); 
+  console.log(req.body['newgoal']); 
+  User['account'].update({username: req.body['username']}, {$push: {'goals': req.body['newgoal']}}, {upsert: true}, function (err, data) {
+    res.send('working');
+  });
+});
+app.post('/api/addFriend', function(req, res) {
+  console.log(req.body['username']); 
+  console.log(req.body['friend']); 
+  User['account'].update({username: req.body['username']}, {$push: {'friends': req.body['friend']}}, {upsert: true}, function (err, data) {
+    res.send('working');
+  });
 });
 
 mongoose.connect('mongodb://54.191.220.231:27017/user_accounts', function(err) {
@@ -40,28 +84,17 @@ mongoose.connect('mongodb://54.191.220.231:27017/user_accounts', function(err) {
   console.log(mongoose.connection.readyState);
 });
 
-function createUser() {
-  var user = new User({
-    first_name: 'Patty',
-    last_name: 'Cake',
-    age: 25,
-    gender: 'Female'
-  });
-  user.save(function (err) {
-    if (err) throw err;
-    console.log('saving');
-  });
-
-  User.find(function (err, data) {
+app.get('/api/getGoals', function(req, res) {
+  User['account'].find({}, function (err, data) {
     if (err) return err;
     else {
-      console.log(data);
+      res.send({rows: data});
     }
   });
-}
+});
+
 
 app.get('*', (req, res) => {
- console.log('----------------first app get');
   res.sendFile(path.resolve(__dirname + '/../../build', 'index.html'));
 });
 

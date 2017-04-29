@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
-import '../App.css';
-import Button from './Button';
-import FormInput from './FormInput';
+import { Link } from 'react-router-dom';
+import FormSubmit from './FormSubmit';
+import { Navbar, Nav, NavItem, Menuitem, Panel } from 'react-bootstrap';
+
 
 class App extends Component {
-       // <img src={logo} className="App-logo" alt="logo" />
   render() {
     return (
       <div>
-        <Button />
-        <FormInput textVal="Username" />
-        <FormInput textVal="Password" />
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              Motivator
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+        <center>
+        <Panel style={{height: '400px', width: '350px'}}>
+        <h1>Login</h1>
+        <FormSubmit message="login" list={{Username: 'box', Password: 'box'}} />
+        <div><Link to="/CreateAccount" className="links">Don't have an account? Sign up</Link></div>
+        </Panel>
+        </center>
       </div>
     );
   }
